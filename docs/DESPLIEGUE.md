@@ -80,7 +80,7 @@ git push origin main   # ← esto dispara el despliegue automático
 
 `vite.config.js` usa `base: '/'` por defecto, que es lo correcto para:
 
-- un **dominio propio** (`abogadosfamiliarescdmx.com`), o
+- un **dominio propio** (`abogadosfamiliaresmx.com`), o
 - una **página de usuario/organización** (`usuario.github.io`).
 
 Si en algún momento publicas como **"project page"** sin dominio propio

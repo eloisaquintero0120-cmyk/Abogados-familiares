@@ -13,11 +13,11 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # robots.txt, sitemap.xml y los assets estáticos viven en public/ (Vite los
 # copia tal cual a dist/ durante el build).
 PUBLICO = os.path.join(RAIZ, 'public')
-SITE = 'https://abogadosfamiliarescdmx.com'
+SITE = 'https://abogadosfamiliaresmx.com'
 WA = 'https://wa.me/5215620829905?text=Hola%2C%20necesito%20asesor%C3%ADa%20legal%20familiar'
 TEL_HREF = 'tel:+525620829905'
 TEL_TXT = '56 2082 9905'
-EMAIL = 'contacto@abogadosfamiliarescdmx.com'
+EMAIL = 'contacto@abogadosfamiliaresmx.com'
 DIRECCION = 'Be Grand Downtown Reforma, Ignacio Ramírez s/n, Col. Tabacalera, Cuauhtémoc, CDMX, C.P. 06030'
 FORMSPREE = 'https://formspree.io/f/TU_ID_FORMSPREE'  # ← sustituir por el endpoint real
 

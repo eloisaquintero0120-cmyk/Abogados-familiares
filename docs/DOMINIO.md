@@ -1,8 +1,8 @@
-# Configurar el dominio propio (`abogadosfamiliarescdmx.com`)
+# Configurar el dominio propio (`abogadosfamiliaresmx.com`)
 
 El sitio funciona sin dominio propio en `https://usuario.github.io/...`, pero
 lo recomendable para el despacho es usar el dominio
-**`abogadosfamiliarescdmx.com`**. Los `canonical`, el `sitemap.xml` y las
+**`abogadosfamiliaresmx.com`**. Los `canonical`, el `sitemap.xml` y las
 imágenes Open Graph ya asumen ese dominio.
 
 > Si el dominio final fuera **otro**, cámbialo en `tools/generar.py`
@@ -16,7 +16,7 @@ imágenes Open Graph ya asumen ese dominio.
 Ya existe [`public/CNAME`](../public/CNAME) con el contenido:
 
 ```
-abogadosfamiliarescdmx.com
+abogadosfamiliaresmx.com
 ```
 
 Vite lo copia a `dist/CNAME` en **cada** build, así que el dominio se conserva
@@ -25,7 +25,7 @@ en todos los despliegues. **No lo borres.**
 ## 2. Registrar el dominio en GitHub
 
 1. En GitHub: **Settings → Pages → Custom domain**.
-2. Escribe `abogadosfamiliarescdmx.com` y pulsa **Save**.
+2. Escribe `abogadosfamiliaresmx.com` y pulsa **Save**.
 3. GitHub empezará a verificar el DNS (paso siguiente).
 
 ## 3. Configurar el DNS (en el proveedor del dominio)
@@ -34,7 +34,7 @@ Hay que crear estos registros donde administres el DNS (Cloudflare, GoDaddy,
 Namecheap, etc.). Se usa el **apex** (dominio sin `www`) como principal y `www`
 como alias.
 
-### Apex `abogadosfamiliarescdmx.com` — 4 registros `A`
+### Apex `abogadosfamiliaresmx.com` — 4 registros `A`
 
 | Tipo | Nombre / Host | Valor             |
 | ---- | ------------- | ----------------- |
@@ -71,10 +71,10 @@ como alias.
 
 ```bash
 # Debe devolver las 4 IPs 185.199.108-111.153
-dig abogadosfamiliarescdmx.com +noall +answer -t A
+dig abogadosfamiliaresmx.com +noall +answer -t A
 
 # El www debe apuntar a usuario.github.io
-dig www.abogadosfamiliarescdmx.com +noall +answer -t CNAME
+dig www.abogadosfamiliaresmx.com +noall +answer -t CNAME
 ```
 
 La propagación DNS puede tardar de minutos a ~24 h.
@@ -92,14 +92,14 @@ Esta casilla solo aparece tras validarse el dominio y emitirse el certificado
 
 ## 6. Comprobación final
 
-- `https://abogadosfamiliarescdmx.com` carga con candado (HTTPS válido).
+- `https://abogadosfamiliaresmx.com` carga con candado (HTTPS válido).
 - `http://…` y `https://www.…` redirigen al dominio con HTTPS.
 - Settings → Pages muestra "Your site is live at
-  https://abogadosfamiliarescdmx.com" y **Enforce HTTPS** activado.
+  https://abogadosfamiliaresmx.com" y **Enforce HTTPS** activado.
 
 ## 7. Post-lanzamiento (SEO)
 
-- Enviar `https://abogadosfamiliarescdmx.com/sitemap.xml` a **Google Search
+- Enviar `https://abogadosfamiliaresmx.com/sitemap.xml` a **Google Search
   Console** y **Bing Webmaster Tools**.
 - Validar con **Rich Results Test** (los datos estructurados `LegalService`
   y `FAQPage`) y **PageSpeed Insights**.

@@ -46,14 +46,14 @@ dist/                       Salida del build (generada; ignorada por git)
 
 - Teléfono: **56 2082 9905** (`tel:+525620829905`)
 - WhatsApp: `https://wa.me/5215620829905`
-- Email: contacto@abogadosfamiliarescdmx.com
+- Email: contacto@abogadosfamiliaresmx.com
 - Dirección: Be Grand Downtown Reforma, Ignacio Ramírez s/n, Col. Tabacalera, Cuauhtémoc, CDMX, C.P. 06030
 - Horario: Lun–Vie 9:00–19:00 · Sáb 10:00–14:00
 
 ## Pendientes antes de publicar (⚠ confirmar con el despacho)
 
 1. **Formspree**: crear el formulario en [formspree.io](https://formspree.io) (plan gratuito, ~50 envíos/mes) y sustituir `TU_ID_FORMSPREE` en `index.html`, `contacto.html` y `tools/generar.py` por el endpoint real. Mientras tanto, el JS muestra un aviso y redirige la conversión a WhatsApp.
-2. **Dominio**: confirmar si se reutiliza `abogadosfamiliarescdmx.com` (los canonical/sitemap y `public/CNAME` ya lo asumen). Si cambia, actualizar `SITE` en `tools/generar.py` **y** `public/CNAME`, y regenerar (`npm run generar`). Guía completa de DNS/HTTPS en [`docs/DOMINIO.md`](docs/DOMINIO.md).
+2. **Dominio**: confirmar si se reutiliza `abogadosfamiliaresmx.com` (los canonical/sitemap y `public/CNAME` ya lo asumen). Si cambia, actualizar `SITE` en `tools/generar.py` **y** `public/CNAME`, y regenerar (`npm run generar`). Guía completa de DNS/HTTPS en [`docs/DOMINIO.md`](docs/DOMINIO.md).
 3. **Páginas legales**: el Aviso de Privacidad y los Términos son **borradores** que debe validar un abogado del despacho (LFPDPPP).
 4. **Redes sociales**: los iconos del footer apuntan a `#`; poner las URLs reales de Facebook/Instagram/TikTok/LinkedIn.
 5. **Email**: el sitio actual usa `contacto@` e `info@`; aquí se usó `contacto@` — confirmar el definitivo.
