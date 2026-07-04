@@ -1,0 +1,12 @@
+# Dependencias
+node_modules
+
+# Salida del build de Vite (se genera en CI / al desplegar)
+dist
+
+# Varios
+*.local
+.DS_Store
+
+# Artefactos de WSL/NTFS
+*:Zone.Identifier

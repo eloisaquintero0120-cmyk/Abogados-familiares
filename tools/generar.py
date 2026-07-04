@@ -9,6 +9,10 @@ Uso:  python3 tools/generar.py
 import os
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Los .html se generan en la raíz (Vite los toma como entradas de la MPA).
+# robots.txt, sitemap.xml y los assets estáticos viven en public/ (Vite los
+# copia tal cual a dist/ durante el build).
+PUBLICO = os.path.join(RAIZ, 'public')
 SITE = 'https://abogadosfamiliarescdmx.com'
 WA = 'https://wa.me/5215620829905?text=Hola%2C%20necesito%20asesor%C3%ADa%20legal%20familiar'
 TEL_HREF = 'tel:+525620829905'
@@ -310,7 +314,7 @@ def footer(rel=''):
 <a class="wa-flotante" href="{WA}" target="_blank" rel="noopener" aria-label="Chat por WhatsApp">
   {WA_SVG.format(s=30)}
 </a>
-<script src="{rel}js/main.js" defer></script>
+<script type="module" src="{rel}js/main.js"></script>
 </body>
 </html>
 '''
@@ -1131,7 +1135,8 @@ def construir_extra():
 
 # ============================================== robots / sitemap / README ===
 def construir_seo():
-    with open(os.path.join(RAIZ, 'robots.txt'), 'w', encoding='utf-8') as f:
+    os.makedirs(PUBLICO, exist_ok=True)
+    with open(os.path.join(PUBLICO, 'robots.txt'), 'w', encoding='utf-8') as f:
         f.write('User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n' % SITE)
     print('✓ robots.txt')
 
@@ -1143,7 +1148,7 @@ def construir_seo():
     urls = '\n'.join(
         '  <url>\n    <loc>%s/%s</loc>\n    <lastmod>2026-06-12</lastmod>\n  </url>' % (SITE, r)
         for r in rutas)
-    with open(os.path.join(RAIZ, 'sitemap.xml'), 'w', encoding='utf-8') as f:
+    with open(os.path.join(PUBLICO, 'sitemap.xml'), 'w', encoding='utf-8') as f:
         f.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
                 + urls + '\n</urlset>\n')
