@@ -7,6 +7,7 @@ tal cual en GitHub Pages (no es un build step requerido para el deploy).
 Uso:  python3 tools/generar.py
 """
 import os
+import urllib.parse
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Los .html se generan en la raíz (Vite los toma como entradas de la MPA).
@@ -14,12 +15,30 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # copia tal cual a dist/ durante el build).
 PUBLICO = os.path.join(RAIZ, 'public')
 SITE = 'https://abogadosfamiliaresmx.com'
-WA = 'https://wa.me/5215620829905?text=Hola%2C%20necesito%20asesor%C3%ADa%20legal%20familiar'
-TEL_HREF = 'tel:+525620829905'
-TEL_TXT = '56 2082 9905'
-EMAIL = 'contacto@abogadosfamiliaresmx.com'
+# --- Contacto ---
+WA_NUM = '5215514676633'          # número de WhatsApp (con lada país)
+def wa(mensaje):
+    """URL de WhatsApp con mensaje pre-cargado."""
+    return 'https://wa.me/%s?text=%s' % (WA_NUM, urllib.parse.quote(mensaje))
+WA_HOME = wa('Hola, Me gustaría hablar con un especialista en derecho familiar')
+WA = WA_HOME                      # mensaje por defecto (home / páginas generales)
+TEL_HREF = 'tel:+525514676633'
+TEL_TXT = '55 1467 6633'
+EMAIL = 'abogadosfamiliarescdmx@gmail.com'
 DIRECCION = 'Be Grand Downtown Reforma, Ignacio Ramírez s/n, Col. Tabacalera, Cuauhtémoc, CDMX, C.P. 06030'
 FORMSPREE = 'https://formspree.io/f/TU_ID_FORMSPREE'  # ← sustituir por el endpoint real
+
+# --- Redes sociales (URLs reales) ---
+REDES_URL = {
+    'Facebook':  'https://www.facebook.com/share/1BYgSFy9uL/?mibextid=wwXIfr',
+    'Instagram': 'https://www.instagram.com/abogadosfamiliarescdmx?igsh=emxjMWdmbmxqYTQ=',
+    'TikTok':    'https://www.tiktok.com/@abogadosfamiliares?_r=1&_t=ZS-97RZH9sUmof',
+    'LinkedIn':  'https://www.linkedin.com/in/abogadosfamiliares',
+}
+
+# --- Google Maps (ficha del negocio) ---
+MAPS_LINK  = 'https://maps.app.goo.gl/17E329L4QLTiiioC8'
+MAPS_EMBED = 'https://www.google.com/maps?q=Abogados%20Familiares%20CDMX,%20Ciudad%20de%20M%C3%A9xico&z=16&output=embed'
 
 # ---------------------------------------------------------------- iconos SVG
 def icono(nombre, size=28):
@@ -57,7 +76,7 @@ ESPECIALIDADES = [
     dict(slug='divorcio', nombre='Divorcio', icono='corazon', precio='Desde $12,500 MXN',
          corta='Divorcio express, incausado y contencioso. Trámite completo desde la demanda hasta la inscripción en el Registro Civil.',
          titulo='Abogados de Divorcio en CDMX',
-         meta='Abogados de divorcio en CDMX: express, voluntario, incausado y contencioso. Trámite completo desde $12,500 MXN. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Abogados de divorcio en CDMX: express, voluntario, incausado y contencioso. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['Terminar un matrimonio es una de las decisiones más difíciles de la vida. Nuestro equipo te acompaña en todo el proceso para que lo resuelvas de la forma más rápida, económica y pacífica posible, protegiendo tu patrimonio y, sobre todo, a tus hijos.',
                 'En la Ciudad de México existe el <strong>divorcio incausado</strong>: no necesitas demostrar ninguna causa ni el consentimiento de tu cónyuge para divorciarte. Basta la voluntad de uno de los dos. Nosotros nos encargamos de la estrategia, la demanda, el convenio y todo el trámite ante el juez de lo familiar.'],
          incluye=['Divorcio express / voluntario (mutuo acuerdo) — el más rápido y económico',
@@ -72,7 +91,7 @@ ESPECIALIDADES = [
     dict(slug='pension-alimenticia', nombre='Pensión Alimenticia', icono='dinero', precio='Desde $22,500 MXN',
          corta='Demanda, cálculo, aumento, reducción y ejecución. Asesoría sobre el RNOA y la nueva ley de pensiones.',
          titulo='Abogados de Pensión Alimenticia en CDMX',
-         meta='Demanda, cálculo, aumento y reducción de pensión alimenticia en CDMX. Asesoría sobre el RNOA. Desde $22,500 MXN. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Demanda, cálculo, aumento y reducción de pensión alimenticia en CDMX. Asesoría sobre el RNOA. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['La pensión alimenticia es un derecho de tus hijos, no un favor. Te ayudamos a demandarla, calcularla correctamente, aumentarla cuando las necesidades crecen, o defenderte de una pensión desproporcionada.',
                 'Con la entrada en operación del <strong>Registro Nacional de Obligaciones Alimentarias (RNOA)</strong>, los deudores alimentarios morosos enfrentan consecuencias serias: inscripción en el registro, restricciones para trámites y cargos públicos, e incluso impedimentos migratorios. Conocemos a fondo la nueva legislación y la usamos a favor de tu familia.'],
          incluye=['Demanda inicial de pensión alimenticia y medidas provisionales',
@@ -87,7 +106,7 @@ ESPECIALIDADES = [
     dict(slug='guarda-y-custodia', nombre='Guarda y Custodia', icono='familia', precio='Desde $28,000 MXN',
          corta='Custodia exclusiva, compartida y provisional. Régimen de visitas y modificación de custodia.',
          titulo='Abogados de Guarda y Custodia en CDMX',
-         meta='Juicios de guarda y custodia en CDMX: exclusiva, compartida, provisional y régimen de visitas. Desde $28,000 MXN. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Juicios de guarda y custodia en CDMX: exclusiva, compartida, provisional y régimen de visitas. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['Nada importa más que tus hijos. Te representamos en juicios de guarda y custodia con una estrategia centrada en el <strong>interés superior del menor</strong>, que es el criterio que guía todas las decisiones del juez familiar.',
                 'Atendemos custodias exclusivas, compartidas y provisionales, así como la fijación o modificación del régimen de visitas y convivencias. También actuamos con urgencia cuando existe riesgo para el menor.'],
          incluye=['Custodia exclusiva o compartida (de común acuerdo o en juicio)',
@@ -102,7 +121,7 @@ ESPECIALIDADES = [
     dict(slug='patria-potestad', nombre='Patria Potestad', icono='escudo', precio='Desde $35,000 MXN',
          corta='Pérdida, suspensión y recuperación. Defensa de tus derechos parentales ante el juez familiar.',
          titulo='Juicios de Patria Potestad en CDMX',
-         meta='Pérdida, suspensión y recuperación de la patria potestad en CDMX. Defensa de tus derechos parentales. Desde $35,000 MXN. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Pérdida, suspensión y recuperación de la patria potestad en CDMX. Defensa de tus derechos parentales. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['La patria potestad es el conjunto de derechos y obligaciones de los padres sobre sus hijos menores: cuidarlos, educarlos, representarlos legalmente y administrar sus bienes. Perderla —o que el otro progenitor abuse de ella— tiene consecuencias profundas.',
                 'Te representamos tanto para <strong>demandar la pérdida o suspensión</strong> de la patria potestad (por violencia, abandono, incumplimiento alimentario reiterado o riesgo para el menor) como para <strong>defenderte</strong> de una demanda injusta y recuperar tus derechos parentales.'],
          incluye=['Demanda de pérdida de patria potestad (abandono, violencia, incumplimiento)',
@@ -116,7 +135,7 @@ ESPECIALIDADES = [
     dict(slug='violencia-familiar', nombre='Violencia Familiar', icono='alerta', precio='Atención 24/7',
          corta='Órdenes de protección, denuncias y medidas urgentes. Atención inmediata para víctimas.',
          titulo='Abogados en Violencia Familiar — Atención 24/7',
-         meta='Atención urgente 24/7 a víctimas de violencia familiar en CDMX: órdenes de protección, denuncias y medidas cautelares. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Atención urgente 24/7 a víctimas de violencia familiar en CDMX: órdenes de protección, denuncias y medidas cautelares. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['Si tú o tus hijos están en peligro, <strong>no estás sola/o</strong>. Actuamos de inmediato para obtener órdenes de protección, presentar denuncias y poner a tu familia a salvo. Atendemos emergencias las 24 horas, los 7 días de la semana.',
                 'La violencia familiar no es solo física: también es psicológica, económica, patrimonial y sexual. La ley protege a las víctimas con medidas urgentes que pueden ordenarse en horas, incluyendo la salida del agresor del domicilio y la prohibición de acercarse.',
                 '<strong>En emergencia inmediata llama al 911.</strong> Línea Mujeres CDMX: 55 5658 1111.'],
@@ -128,10 +147,10 @@ ESPECIALIDADES = [
                   'Juicio de divorcio y reparación del daño derivados de la violencia'],
          faqs=[('¿Qué es una orden de protección?', 'Es una medida urgente que dicta un juez o el Ministerio Público para proteger a la víctima: puede ordenar al agresor salir del domicilio, prohibirle acercarse a ti, a tus hijos, a tu trabajo o escuela, y suspender las convivencias. Puede obtenerse en cuestión de horas.'),
                ('¿Necesito pruebas para denunciar?', 'Tu declaración es el punto de partida y tiene valor probatorio. Ayudan los dictámenes médicos y psicológicos, mensajes, fotografías y testigos, pero la falta de pruebas documentales no impide denunciar ni solicitar medidas de protección.')]),
-    dict(slug='testamentos', nombre='Testamentos y Sucesiones', icono='documento', precio='Desde $15,000 MXN',
+    dict(slug='testamentos', nombre='Testamentario', icono='documento', precio='Desde $15,000 MXN',
          corta='Elaboración de testamentos, juicios testamentarios e intestamentarios y adjudicación de herencias.',
          titulo='Testamentos y Sucesiones en CDMX',
-         meta='Testamentos, juicios sucesorios testamentarios e intestamentarios y adjudicación de herencias en CDMX. Desde $15,000 MXN. Primera consulta GRATIS. ☎ 56 2082 9905.',
+         meta='Testamentos, juicios sucesorios testamentarios e intestamentarios y adjudicación de herencias en CDMX. Primera consulta GRATIS. ☎ 55 1467 6633.',
          intro=['Proteger el patrimonio de tu familia es un acto de amor. Te asesoramos en la elaboración de testamentos y te representamos en juicios sucesorios para que la herencia llegue a quien corresponde, sin pleitos interminables.',
                 'Si tu familiar falleció <strong>sin testamento</strong>, es necesario tramitar un <strong>juicio intestamentario</strong> para declarar herederos y adjudicar los bienes. Si dejó testamento, el <strong>juicio testamentario</strong> lo ejecuta. En ambos casos, el trámite puede ser judicial o, en ciertos supuestos, notarial.'],
          incluye=['Asesoría y elaboración de testamento público abierto',
@@ -145,7 +164,7 @@ ESPECIALIDADES = [
     dict(slug='contratos-y-convenios', nombre='Contratos y Convenios', icono='pluma', precio='Desde $12,500 MXN',
          corta='Capitulaciones, convenios de divorcio, liquidación de sociedad conyugal y acuerdos de pensión.',
          titulo='Contratos y Convenios Familiares en CDMX',
-         meta='Capitulaciones matrimoniales, convenios de divorcio, liquidación de sociedad conyugal y acuerdos de pensión en CDMX. Desde $12,500 MXN. ☎ 56 2082 9905.',
+         meta='Capitulaciones matrimoniales, convenios de divorcio, liquidación de sociedad conyugal y acuerdos de pensión en CDMX. ☎ 55 1467 6633.',
          intro=['Un buen convenio evita un mal juicio. Redactamos y negociamos los acuerdos que dan certeza jurídica a tu familia y a tu patrimonio, y los ratificamos ante el juez para que tengan plena fuerza legal.',
                 'Desde las <strong>capitulaciones matrimoniales</strong> antes o durante el matrimonio, hasta el <strong>convenio de divorcio</strong> que regula custodia, pensión, visitas y reparto de bienes: un documento bien hecho hoy te ahorra años de litigio mañana.'],
          incluye=['Capitulaciones matrimoniales (separación de bienes / sociedad conyugal)',
@@ -156,10 +175,10 @@ ESPECIALIDADES = [
                   'Donaciones y acuerdos patrimoniales entre familiares'],
          faqs=[('¿Un convenio privado de pensión tiene validez?', 'Un acuerdo privado obliga a las partes, pero para que sea plenamente ejecutable (por ejemplo, para embargar en caso de incumplimiento) conviene ratificarlo ante el juez de lo familiar o elevarlo a sentencia. Nosotros nos encargamos de ese trámite.'),
                ('¿Puedo cambiar de sociedad conyugal a separación de bienes?', 'Sí. Las capitulaciones matrimoniales pueden otorgarse o modificarse durante el matrimonio mediante un trámite ante notario o juez, liquidando previamente la sociedad conyugal existente.')]),
-    dict(slug='gestoria', nombre='Gestoría Familiar', icono='portafolio', precio='Desde $5,500 MXN',
+    dict(slug='gestoria', nombre='Gestoría en Trámites Judiciales y Administrativos', icono='portafolio', precio='Desde $5,500 MXN',
          corta='Corrección de actas, registros extemporáneos, rectificaciones, apostillas e inscripción de sentencias.',
          titulo='Gestoría Familiar y Registro Civil en CDMX',
-         meta='Corrección y rectificación de actas, registros extemporáneos, apostillas e inscripción de sentencias en CDMX. Desde $5,500 MXN. ☎ 56 2082 9905.',
+         meta='Corrección y rectificación de actas, registros extemporáneos, apostillas e inscripción de sentencias en CDMX. ☎ 55 1467 6633.',
          intro=['Un error en un acta puede frenar un trámite de toda la familia: pasaportes, herencias, pensiones, escuelas. Nos encargamos de corregirlo de la vía más rápida posible, administrativa o judicial.',
                 'También gestionamos registros extemporáneos de nacimiento, inscripción de sentencias (divorcio, adopción, rectificación) ante el Registro Civil, apostillas y legalizaciones para que tus documentos surtan efectos en México y en el extranjero.'],
          incluye=['Corrección y rectificación de actas (nombres, fechas, datos erróneos)',
@@ -169,10 +188,10 @@ ESPECIALIDADES = [
                   'Inscripción de sentencias y resoluciones en el Registro Civil',
                   'Apostilla y legalización de documentos'],
          faqs=[('¿La corrección de un acta siempre requiere juicio?', 'No. Los errores ortográficos o mecanográficos evidentes se corrigen por la vía administrativa ante el Registro Civil. Cuando el cambio afecta datos esenciales (filiación, identidad), se requiere un juicio de rectificación. Evaluamos gratis cuál vía aplica a tu caso.')]),
-    dict(slug='interdiccion', nombre='Juicio de Interdicción', icono='persona-ok', precio='Desde $45,000 MXN',
+    dict(slug='interdiccion', nombre='Apoyos Extra Ordinarios', icono='persona-ok', precio='Desde $45,000 MXN',
          corta='Declaración de incapacidad legal y designación de tutor y curador.',
          titulo='Juicio de Interdicción en CDMX',
-         meta='Juicio de interdicción en CDMX: declaración de estado de incapacidad y designación de tutor y curador para proteger a tu familiar. Desde $45,000 MXN. ☎ 56 2082 9905.',
+         meta='Juicio de interdicción en CDMX: declaración de estado de incapacidad y designación de tutor y curador para proteger a tu familiar. ☎ 55 1467 6633.',
          intro=['Cuando un familiar no puede gobernarse por sí mismo —por una discapacidad intelectual, un padecimiento psiquiátrico o una enfermedad degenerativa como el Alzheimer— la familia necesita una figura legal para protegerlo a él y a su patrimonio.',
                 'El <strong>juicio de interdicción</strong> declara judicialmente el estado de incapacidad y designa un <strong>tutor</strong> (que cuida de la persona y sus bienes) y un <strong>curador</strong> (que vigila al tutor). Te acompañamos en todo el proceso con sensibilidad y experiencia, incluyendo los apoyos extraordinarios que contempla la legislación más reciente.'],
          incluye=['Demanda de interdicción y trámite judicial completo',
@@ -184,6 +203,24 @@ ESPECIALIDADES = [
          faqs=[('¿Quién puede promover la interdicción?', 'El cónyuge o concubino, los ascendientes, descendientes o hermanos de la persona, y en ciertos casos el Ministerio Público. El juez resuelve con base en dictámenes médicos y la escucha directa de la persona.'),
                ('¿Cuánto tarda un juicio de interdicción?', 'Típicamente entre 8 y 14 meses, dependiendo de la complejidad médica del caso y de la carga del juzgado. Pueden solicitarse medidas provisionales (tutor interino) desde el inicio.')]),
 ]
+
+# --- Vista del home: 7 especialidades principales + "otras áreas" al pie ---
+ESP_POR_SLUG = {e['slug']: e for e in ESPECIALIDADES}
+HOME_ESP_SLUGS = ['pension-alimenticia', 'divorcio', 'contratos-y-convenios',
+                  'testamentos', 'interdiccion', 'guarda-y-custodia', 'gestoria']
+HOME_ESP = [ESP_POR_SLUG[s] for s in HOME_ESP_SLUGS]
+OTRAS_ESP = [e for e in ESPECIALIDADES if e['slug'] not in HOME_ESP_SLUGS]
+
+# Descripciones de marketing para las tarjetas del home (texto del despacho).
+HOME_DESC = {
+    'pension-alimenticia': 'Garantiza el bienestar de tus hijos. Te asesoramos para asegurar, calcular o modificar el monto justo de los recursos necesarios para el sustento, educación, salud y sano desarrollo de los menores de edad.',
+    'divorcio': 'Cierra ciclos de forma legal y tranquila. Llevamos tu proceso de disolución matrimonial (ya sea por mutuo acuerdo o incausado) buscando la vía más rápida, estratégica y menos desgastante para ti y tu familia.',
+    'contratos-y-convenios': 'Protege tus acuerdos y tu patrimonio. Redacción, revisión y validación legal de todo tipo de acuerdos familiares, asegurando que cada documento cumpla estrictamente con la legislación de la CDMX para evitar conflictos futuros.',
+    'testamentos': 'Asegura el futuro de los tuyos. Te acompañamos en la planeación de tu herencia o en la tramitación del proceso sucesorio (con o sin testamento), garantizando el cumplimiento de la última voluntad y la protección de los bienes familiares.',
+    'interdiccion': 'Defensa integral para situaciones especiales. Asistencia legal especializada para personas que requieren medidas de apoyo especiales, salvaguardando sus derechos, autonomía e integridad ante cualquier instancia judicial.',
+    'guarda-y-custodia': 'El interés superior de tus hijos es nuestra prioridad. Te ayudamos a determinar quién ejercerá el cuidado directo de los menores y a establecer regímenes de visitas y convivencias sanos, justos y equilibrados.',
+    'gestoria': 'Agilizamos tus trámites ante cualquier institución. Nos encargamos del seguimiento, obtención de copias certificadas, búsqueda de expedientes y cualquier gestión administrativa o judicial ante tribunales, fiscalías y dependencias públicas, para que tú no tengas que preocuparte.',
+}
 
 # ------------------------------------------------------------------ plantilla
 def head(titulo, descripcion, ruta, rel='', extra=''):
@@ -221,7 +258,8 @@ def head(titulo, descripcion, ruta, rel='', extra=''):
 {extra}</head>
 '''
 
-def navbar(rel='', activo=''):
+def navbar(rel='', activo='', wa_link=None):
+    wa_link = wa_link or WA
     def cur(p):
         return ' aria-current="page"' if activo == p else ''
     drop = '\n'.join(
@@ -250,7 +288,7 @@ def navbar(rel='', activo=''):
       <li><a href="{rel}blog.html"{cur('blog')}>Blog</a></li>
       <li><a href="{rel}contacto.html"{cur('contacto')}>Contacto</a></li>
       <li class="nav-cta">
-        <a class="btn btn-whatsapp" href="{WA}" target="_blank" rel="noopener">
+        <a class="btn btn-whatsapp" href="{wa_link}" target="_blank" rel="noopener">
           {WA_SVG.format(s=18)} Asesoría GRATIS
         </a>
       </li>
@@ -259,11 +297,12 @@ def navbar(rel='', activo=''):
 </header>
 '''
 
-def footer(rel=''):
+def footer(rel='', wa_link=None):
+    wa_link = wa_link or WA
     esp = '\n'.join(f'        <li><a href="{rel}{e["slug"]}.html">{e["nombre"]}</a></li>'
                     for e in ESPECIALIDADES)
     redes = '\n'.join(
-        f'        <a href="#" aria-label="{nombre}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{path}</svg></a>'
+        f'        <a href="{REDES_URL.get(nombre, "#")}" target="_blank" rel="noopener" aria-label="{nombre}"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{path}</svg></a>'
         for nombre, path in REDES.items())
     return f'''<footer class="footer">
   <div class="container">
@@ -311,7 +350,7 @@ def footer(rel=''):
     </div>
   </div>
 </footer>
-<a class="wa-flotante" href="{WA}" target="_blank" rel="noopener" aria-label="Chat por WhatsApp">
+<a class="wa-flotante" href="{wa_link}" target="_blank" rel="noopener" aria-label="Chat por WhatsApp">
   {WA_SVG.format(s=30)}
 </a>
 <script type="module" src="{rel}js/main.js"></script>
@@ -319,25 +358,26 @@ def footer(rel=''):
 </html>
 '''
 
-def pagina(ruta, titulo, descripcion, cuerpo, activo='', extra_head=''):
+def pagina(ruta, titulo, descripcion, cuerpo, activo='', extra_head='', wa_link=None):
     rel = '../' if '/' in ruta else ''
     html = (head(titulo, descripcion, ruta, rel, extra_head)
-            + '<body>\n' + navbar(rel, activo)
+            + '<body>\n' + navbar(rel, activo, wa_link)
             + '<main id="contenido-principal">\n' + cuerpo + '</main>\n'
-            + footer(rel))
+            + footer(rel, wa_link))
     destino = os.path.join(RAIZ, ruta)
     os.makedirs(os.path.dirname(destino), exist_ok=True)
     with open(destino, 'w', encoding='utf-8') as f:
         f.write(html)
     print('✓', ruta)
 
-def cta_final(rel=''):
+def cta_final(rel='', wa_link=None):
+    wa_link = wa_link or WA
     return f'''<section class="seccion cta-final">
   <div class="container">
     <h2>Da el primer paso hoy mismo</h2>
     <p>Tu primera consulta en línea es <strong>GRATIS</strong> y 100% confidencial. Cuéntanos tu caso y te diremos exactamente qué hacer.</p>
     <div class="hero-ctas">
-      <a class="btn btn-whatsapp btn-grande" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=20)} Consulta GRATIS por WhatsApp</a>
+      <a class="btn btn-whatsapp btn-grande" href="{wa_link}" target="_blank" rel="noopener">{WA_SVG.format(s=20)} Consulta GRATIS por WhatsApp</a>
       <a class="btn btn-claro btn-grande" href="{TEL_HREF}">{icono('telefono', 20)} Llamar: {TEL_TXT}</a>
     </div>
   </div>
@@ -353,7 +393,7 @@ JSONLD_LEGAL = '''<script type="application/ld+json">
   "image":"%s/assets/og-image.png",
   "logo":"%s/assets/icono-512.png",
   "url":"%s/",
-  "telephone":"+525620829905",
+  "telephone":"+525514676633",
   "email":"%s",
   "priceRange":"$$",
   "address":{"@type":"PostalAddress","streetAddress":"Be Grand Downtown Reforma, Ignacio Ram\\u00edrez s/n, Col. Tabacalera","addressLocality":"Cuauht\\u00e9moc","addressRegion":"CDMX","postalCode":"06030","addressCountry":"MX"},
@@ -369,7 +409,7 @@ JSONLD_LEGAL = '''<script type="application/ld+json">
 
 FAQS_HOME = [
     ('¿Cuánto cuesta un divorcio en CDMX en 2026?',
-     'Desde $12,500 MXN en un divorcio express (mutuo acuerdo, sin hijos ni bienes) hasta $95,000 MXN o más en casos contenciosos largos. El costo depende del tipo de divorcio, si hay hijos y bienes, y del nivel de conflicto. Ofrecemos planes de pago: los juicios pueden iniciarse desde un pago mínimo de $7,500 MXN.'),
+     'El costo depende del tipo de divorcio (voluntario, incausado o contencioso), de si hay hijos y bienes, y del nivel de conflicto. Por eso cada asunto es único y requiere un análisis personalizado: tras tu valoración inicial gratuita evaluamos tu caso y te entregamos una propuesta de honorarios clara y transparente, con opciones de pago accesibles adaptadas a tus necesidades.'),
     ('¿Qué pasa si no pagan la pensión alimenticia?',
      'El incumplimiento tiene consecuencias graves: embargo de bienes y cuentas bancarias, retención directa del salario, inscripción en el RNOA (Registro Nacional de Obligaciones Alimentarias), restricciones para trámites y, en casos graves, proceso penal con pena de 3 a 5 años de prisión en CDMX.'),
     ('¿A qué edad puede un hijo elegir con quién vivir?',
@@ -379,7 +419,7 @@ FAQS_HOME = [
     ('¿Atienden casos fuera de la Ciudad de México?',
      'Nuestra sede está en CDMX y atendemos toda el área metropolitana, incluido el Estado de México. Las asesorías en línea y por teléfono están disponibles para cualquier parte de la República.'),
     ('¿Ofrecen planes de pago?',
-     'Sí. Manejamos precios transparentes y esquemas de pago en parcialidades: los juicios pueden iniciarse desde un pago mínimo de $7,500 MXN. Los precios publicados son ilustrativos; el costo final se confirma al conocer tu caso.'),
+     'Sí. Adaptamos esquemas de pago accesibles a las necesidades de cada cliente. Tras conocer tu caso en la asesoría te entregamos una propuesta de honorarios clara y transparente, con opciones de pago en parcialidades.'),
 ]
 
 def jsonld_faq(faqs):
@@ -397,13 +437,16 @@ def jsonld_faq(faqs):
 
 # ============================================================== HOME ========
 def construir_home():
-    tarjetas = '\n'.join(f'''      <article class="tarjeta">
+    tarjetas = '\n'.join(f'''      <article class="tarjeta tarjeta-esp">
         <div class="icono">{icono(e['icono'])}</div>
         <h3>{e['nombre']}</h3>
-        <p>{e['corta']}</p>
-        <p class="precio">{e['precio']}*</p>
+        <p>{HOME_DESC.get(e['slug'], e['corta'])}</p>
         <a class="enlace" href="{e['slug']}.html">Conocer más →</a>
-      </article>''' for e in ESPECIALIDADES)
+      </article>''' for e in HOME_ESP)
+
+    otras_html = '\n'.join(
+        f'''      <a class="chip-area" href="{e['slug']}.html"><span class="icono">{icono(e['icono'], 20)}</span>{e['nombre']}</a>'''
+        for e in OTRAS_ESP)
 
     faqs_html = '\n'.join(f'''    <details>
       <summary>{q}</summary>
@@ -432,7 +475,7 @@ def construir_home():
         </div>
       </article>''' for slug, cat, tit, ext, ic in [
         ('cuanto-cuesta-divorcio-cdmx-2026', 'Divorcio', '¿Cuánto cuesta un divorcio en CDMX en 2026?',
-         'Desglosamos honorarios, gastos judiciales y tiempos por tipo de divorcio: desde $12,500 MXN el express hasta los contenciosos.', 'corazon'),
+         'Desglosamos honorarios, gastos judiciales y tiempos por tipo de divorcio, del express al contencioso, y cómo ahorrar.', 'corazon'),
         ('que-pasa-si-no-paga-pension', 'Pensión Alimenticia', '¿Qué pasa si no pagan la pensión alimenticia?',
          'Embargo, retención de salario, RNOA, restricción migratoria y hasta prisión: todas las consecuencias del incumplimiento.', 'dinero'),
         ('custodia-compartida-mexico-2026', 'Custodia', 'Custodia compartida en México 2026',
@@ -442,8 +485,8 @@ def construir_home():
     cuerpo = f'''<section class="hero">
   <div class="container hero-grid">
     <div>
-      <h1>Abogados de Familia en CDMX</h1>
-      <p class="subtitulo">Defendemos tus derechos en divorcio, pensión alimenticia, guarda y custodia, sucesiones y testamentos. <strong>Primera consulta en línea GRATIS.</strong></p>
+      <h1>Abogados familiares en Ciudad de México</h1>
+      <p class="subtitulo">Especialistas en divorcio express, pensión alimenticia, guarda y custodia, patria potestad, sucesiones, testamentos, contratos y convenios. Más de 15 años representando familias ante los juzgados familiares de la CDMX. <strong>Primera consulta en línea GRATIS.</strong></p>
       <p class="hero-confianza">
         <span>⭐ 4.9/5 (151 reseñas)</span>
         <span>13,000+ casos resueltos</span>
@@ -482,7 +525,12 @@ def construir_home():
     <div class="grid-servicios">
 {tarjetas}
     </div>
-    <p class="nota-precios">*Precios ilustrativos y aproximados "desde", en pesos mexicanos. El costo final depende de las particularidades de cada caso y se confirma en la asesoría. Ofrecemos planes de pago: juicios desde un pago inicial de $7,500 MXN.</p>
+    <div class="otras-areas">
+      <span class="otras-areas-titulo">Otras áreas de práctica</span>
+      <div class="chips-areas">
+{otras_html}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -495,11 +543,11 @@ def construir_home():
     </div>
     <div class="planes">
       <div class="plan">
-        <h3>Valoración inicial</h3>
+        <h3>Valoración inicial online</h3>
         <p class="monto">$0 <small>MXN</small></p>
+        <p class="plan-desc">Gratuita. Brindamos asesoría legal en línea sin costo para quienes buscan orientación en materia familiar en CDMX.</p>
         <ul>
           <li>Valoración online gratuita de tu caso</li>
-          <li>O llamada de hasta 15 minutos</li>
           <li>Te decimos si tu caso procede y qué vía conviene</li>
           <li>Confidencialidad absoluta</li>
         </ul>
@@ -508,22 +556,22 @@ def construir_home():
       <div class="plan destacado">
         <span class="etiqueta">Más solicitada</span>
         <h3>Asesoría por llamada</h3>
-        <p class="monto">$990 <small>MXN</small></p>
+        <p class="monto">$890 <small>MXN</small></p>
+        <p class="plan-desc">Duración 40 min. Asesoría personalizada con especialistas en derecho familiar.</p>
         <ul>
-          <li>Llamada de 60 a 90 minutos</li>
-          <li>Con dos abogados expertos en tu tema</li>
-          <li>Análisis de documentos y estrategia inicial</li>
-          <li>Plan de acción concreto para tu caso</li>
+          <li>Resolvemos todas tus dudas legales</li>
+          <li>Te guiamos paso a paso en tu caso</li>
+          <li>Para que tomes decisiones informadas y seguras</li>
         </ul>
         <a class="btn btn-primario" href="contacto.html">Agendar llamada</a>
       </div>
       <div class="plan">
         <h3>Asesoría presencial</h3>
-        <p class="monto">$2,490 <small>MXN</small></p>
+        <p class="monto">$1,890 <small>MXN</small></p>
+        <p class="plan-desc">En nuestras oficinas de la CDMX, con cita previa. Atención personalizada y estrategias jurídicas para proteger tus intereses y tu patrimonio.</p>
         <ul>
           <li>Sesión en nuestro despacho (con cita previa)</li>
           <li>Revisión completa de tu expediente</li>
-          <li>Estrategia legal detallada por escrito</li>
           <li>A 2 minutos del Metro Revolución</li>
         </ul>
         <a class="btn btn-secundario" href="contacto.html">Agendar cita</a>
@@ -532,19 +580,37 @@ def construir_home():
   </div>
 </section>
 
+<section class="seccion seccion-suave" id="nosotros">
+  <div class="container">
+    <div class="seccion-titulo">
+      <span class="kicker">Quiénes somos</span>
+      <h2>Especialistas en Derecho Familiar en Ciudad de México</h2>
+    </div>
+    <div class="prosa-centro">
+      <p>En <strong>Abogados Familiares CDMX</strong> somos un despacho jurídico especializado en derecho familiar con amplia experiencia en la resolución de conflictos legales en la Ciudad de México. Nos enfocamos en brindar asesoría jurídica estratégica y representación legal efectiva para proteger los derechos de nuestros clientes y sus familias.</p>
+      <p>Nuestro equipo de abogados familiares en CDMX ha logrado resultados favorables en una amplia variedad de asuntos, incluyendo divorcio incausado, pensión alimenticia, guarda y custodia de menores, régimen de convivencias, adopciones y convenios familiares. Cada caso es atendido con un enfoque profesional, ético y personalizado, buscando siempre soluciones legales que prioricen el bienestar familiar y la seguridad jurídica de nuestros clientes.</p>
+    </div>
+    <ul class="servicios-lista">
+      <li>Asesoría jurídica en derecho familiar en Ciudad de México</li>
+      <li>Representación ante Juzgados Familiares en CDMX</li>
+      <li>Elaboración de convenios y documentos legales</li>
+      <li>Estrategias legales para la resolución de conflictos familiares</li>
+      <li>Gestión y acompañamiento en todo el proceso jurídico</li>
+    </ul>
+    <p class="prosa-centro"><strong>Trabajamos con compromiso, experiencia y resultados comprobados</strong>, brindando soluciones legales claras y efectivas.</p>
+  </div>
+</section>
+
 <section class="seccion" id="por-que-elegirnos">
   <div class="container dos-columnas">
     <div>
-      <span class="kicker" style="display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rosa-fuerte);margin-bottom:.5rem">¿Por qué elegirnos?</span>
-      <h2>Lo que puedes esperar de nosotros</h2>
+      <span class="kicker" style="display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--rosa-fuerte);margin-bottom:.5rem">Nuestro compromiso</span>
+      <h2>¿Qué puedes esperar de nosotros?</h2>
       <ul class="checklist">
-        <li><span class="check">✓</span><div><b>Respuesta en menos de 2 horas</b><span>por WhatsApp o teléfono, en horario hábil.</span></div></li>
-        <li><span class="check">✓</span><div><b>Especialización exclusiva en derecho familiar</b><span>no somos generalistas: solo familia, todos los días.</span></div></li>
-        <li><span class="check">✓</span><div><b>Estrategias legales personalizadas</b><span>cada caso se estudia y se planea de forma individual.</span></div></li>
-        <li><span class="check">✓</span><div><b>Comunicación clara</b><span>sin tecnicismos innecesarios: siempre sabrás en qué va tu caso.</span></div></li>
-        <li><span class="check">✓</span><div><b>Empatía y trato humano</b><span>te acompañamos en momentos difíciles, con respeto y calidez.</span></div></li>
-        <li><span class="check">✓</span><div><b>Precios transparentes y planes de pago</b><span>juicios desde un pago inicial de $7,500 MXN.</span></div></li>
-        <li><span class="check">✓</span><div><b>Confidencialidad absoluta</b><span>tu información está protegida en todo momento.</span></div></li>
+        <li><span class="check">🤝</span><div><b>Compromiso total con tu caso</b><span>Defendemos tus intereses con firmeza en cada etapa del proceso, buscando siempre la mejor solución legal para ti y tu familia.</span></div></li>
+        <li><span class="check">📩</span><div><b>Atención clara y oportuna</b><span>Respondemos tus dudas de manera rápida, directa y comprensible, para que siempre tengas certeza sobre el avance de tu asunto.</span></div></li>
+        <li><span class="check">🔒</span><div><b>Confidencialidad absoluta</b><span>Toda la información que compartes con nosotros es tratada con estricta reserva y profesionalismo, protegiendo tu privacidad en todo momento.</span></div></li>
+        <li><span class="check">💰</span><div><b>Honorarios justos y accesibles</b><span>Ofrecemos costos claros y accesibles, adaptados a las necesidades de cada cliente durante su proceso legal.</span></div></li>
       </ul>
     </div>
     <div class="panel-marca">
@@ -552,6 +618,100 @@ def construir_home():
       <p>Trabajamos con tres objetivos: <strong>asesoría legal integral</strong>, <strong>resolución eficiente de conflictos</strong> y <strong>proteger el bienestar de tu familia</strong>.</p>
       <p>Si tu caso no procede, te lo decimos desde la primera consulta — gratis y sin compromiso.</p>
       <a class="btn btn-claro" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=18)} Hablar con un abogado</a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="guia-pension">
+  <div class="container">
+    <div class="seccion-titulo">
+      <span class="kicker">Guía legal 2026</span>
+      <h2>Pensión Alimenticia en CDMX 2026: guía para proteger los derechos de tus hijos</h2>
+    </div>
+    <article class="prosa prosa-centro">
+      <h3>¿Qué es la pensión alimenticia en Ciudad de México?</h3>
+      <p>La pensión alimenticia en la Ciudad de México es un derecho fundamental que garantiza el bienestar económico de los hijos menores de edad y, en determinados casos, del cónyuge o concubino que dependa económicamente de la otra parte. Está regulada por el Código Civil de la CDMX y busca cubrir necesidades esenciales como alimentación, vivienda, educación, atención médica, vestido, transporte y desarrollo integral.</p>
+      <h3>¿Cómo solicitar una pensión alimenticia en CDMX?</h3>
+      <p>Es recomendable contar con la asesoría de un abogado familiar especializado. El proceso generalmente comprende:</p>
+      <ol>
+        <li>Presentar una demanda de pensión alimenticia ante el Juzgado Familiar competente.</li>
+        <li>Acreditar la relación familiar con actas de nacimiento, matrimonio o documentos correspondientes.</li>
+        <li>Demostrar las necesidades económicas del acreedor alimentario.</li>
+        <li>Aportar información sobre la capacidad económica de la persona obligada al pago.</li>
+      </ol>
+      <p>En muchos casos, el juez puede decretar una pensión alimenticia provisional mientras se resuelve el procedimiento definitivo.</p>
+      <h3>¿Qué factores considera el juez para fijar el monto?</h3>
+      <ul>
+        <li>Ingresos y capacidad económica del deudor alimentario.</li>
+        <li>Gastos ordinarios y extraordinarios de los hijos.</li>
+        <li>Costos de educación, alimentación, salud, vivienda y recreación.</li>
+        <li>Número de dependientes económicos.</li>
+        <li>Edad y necesidades particulares de los menores.</li>
+      </ul>
+      <h3>Recomendaciones para fortalecer tu caso</h3>
+      <ul class="lista-check">
+        <li>Conserva comprobantes de gastos escolares, médicos y de manutención.</li>
+        <li>Reúne documentación que acredite ingresos y situación económica.</li>
+        <li>Mantén registros bancarios y financieros actualizados.</li>
+        <li>Busca asesoría de un abogado de lo familiar en CDMX con experiencia en pensión alimenticia.</li>
+      </ul>
+      <p>En <strong>Abogados Familiares CDMX</strong> contamos con amplia experiencia en juicios de pensión alimenticia, aumento, reducción, incumplimiento y ejecución de pagos, con representación ante los Juzgados Familiares de la Ciudad de México para proteger los derechos de tus hijos.</p>
+    </article>
+  </div>
+</section>
+
+<section class="seccion seccion-suave" id="novedades">
+  <div class="container">
+    <div class="seccion-titulo">
+      <span class="kicker">Novedades legales</span>
+      <h2>Lo más reciente en derecho familiar 2026</h2>
+      <p>Actualizaciones que pueden impactar tu caso. Desliza con las flechas.</p>
+    </div>
+    <div class="carrusel">
+      <div class="carrusel-vista">
+        <div class="carrusel-pista">
+          <article class="novedad">
+            <span class="novedad-etiqueta">Pensión Alimenticia</span>
+            <h3>Registro Nacional de Deudores Alimentarios 2026: consecuencias de no pagar</h3>
+            <p>Durante 2026 se han fortalecido los mecanismos para garantizar el cumplimiento de la pensión mediante el Registro Nacional de Obligaciones Alimentarias, una herramienta que protege los derechos de niñas, niños y adolescentes.</p>
+            <p>Quienes incumplen pueden ser inscritos en el Registro Nacional de Deudores Alimentarios, lo que afecta diversos trámites personales, laborales y patrimoniales. En la CDMX, los jueces familiares pueden ordenar descuentos vía nómina, embargos y requerimientos judiciales; el incumplimiento reiterado puede generar consecuencias civiles e incluso penales.</p>
+          </article>
+          <article class="novedad">
+            <span class="novedad-etiqueta">SCJN 2026</span>
+            <h3>Pensión alimenticia retroactiva: nuevo criterio de la SCJN</h3>
+            <p>La Suprema Corte reforzó el criterio de que el padre biológico puede ser obligado a cubrir pensión alimenticia aun cuando otra persona haya reconocido legalmente al menor.</p>
+            <p>También reiteró que el derecho a recibir alimentos es irrenunciable e imprescriptible, por lo que los hijos pueden reclamar pagos adeudados de periodos anteriores.</p>
+          </article>
+          <article class="novedad">
+            <span class="novedad-etiqueta">Divorcio</span>
+            <h3>Divorcio incausado en CDMX: qué es y cómo funciona</h3>
+            <p>El divorcio incausado permite que cualquiera de los cónyuges solicite la separación sin expresar una causa ni contar con el consentimiento de la otra parte: basta la voluntad de uno de ellos para iniciar el proceso ante un Juzgado Familiar.</p>
+            <p>Aunque el matrimonio se disuelve, el juez debe resolver temas importantes como la pensión alimenticia, la guarda y custodia de los hijos, el régimen de convivencias y la división de bienes.</p>
+          </article>
+        </div>
+      </div>
+      <div class="carrusel-controles">
+        <button type="button" class="carrusel-btn carrusel-prev" aria-label="Novedad anterior">‹</button>
+        <div class="carrusel-puntos"></div>
+        <button type="button" class="carrusel-btn carrusel-next" aria-label="Novedad siguiente">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion" id="mision-vision">
+  <div class="container">
+    <div class="mv-grid">
+      <div class="mv-card">
+        <h3>Nuestra Misión</h3>
+        <p>Brindar asesoría y representación legal especializada en derecho familiar en la Ciudad de México, con soluciones jurídicas estratégicas, claras y efectivas que protejan los derechos de nuestros clientes y el bienestar de sus familias.</p>
+        <p>Atendemos cada caso con profesionalismo, ética y compromiso —en divorcio, pensión alimenticia, guarda y custodia, régimen de convivencias, sucesorios y convenios— buscando siempre una solución justa, ágil y con el menor conflicto posible.</p>
+      </div>
+      <div class="mv-card">
+        <h3>Nuestra Visión</h3>
+        <p>Ser un despacho líder en derecho familiar en la Ciudad de México, reconocido por la solidez de nuestras estrategias jurídicas, la eficacia de nuestros resultados y la confianza que generamos en cada cliente.</p>
+        <p>Aspiramos a ser la primera opción en CDMX para la resolución de conflictos familiares, con procesos más ágiles y justos, enfocados siempre en el interés superior de niñas, niños y adolescentes y en la estabilidad de las familias.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -649,7 +809,8 @@ def construir_home():
           <li><span class="icono">{icono('reloj', 22)}</span><div><b>Horario</b><span>Lun–Vie 9:00–19:00 · Sáb 10:00–14:00<br>Urgencias por violencia familiar: 24/7</span></div></li>
         </ul>
         <div class="mapa">
-          <iframe src="https://www.google.com/maps?q=19.4358,-99.1545&z=16&output=embed" title="Mapa de la ubicación del despacho — Be Grand Downtown Reforma, Col. Tabacalera, CDMX" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <iframe src="{MAPS_EMBED}" title="Mapa de la ubicación del despacho — Abogados Familiares CDMX, Col. Tabacalera, CDMX" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <p style="margin:.6rem 0 0;text-align:center"><a href="{MAPS_LINK}" target="_blank" rel="noopener">Ver en Google Maps →</a></p>
         </div>
       </div>
     </div>
@@ -658,13 +819,14 @@ def construir_home():
 '''
     pagina('index.html',
            'Abogados Familiares CDMX | Divorcio, Pensión y Custodia',
-           'Despacho de abogados familiares en CDMX. Divorcio express, pensión alimenticia y guarda y custodia. 15 años de experiencia. Primera consulta GRATIS. ☎ 56 2082 9905.',
+           'Despacho de abogados familiares en CDMX. Divorcio express, pensión alimenticia y guarda y custodia. 15 años de experiencia. Primera consulta GRATIS. ☎ 55 1467 6633.',
            cuerpo, activo='inicio',
            extra_head=JSONLD_LEGAL + jsonld_faq(FAQS_HOME))
 
 # ==================================================== páginas de especialidad
 def construir_especialidades():
     for e in ESPECIALIDADES:
+        wa_esp = wa(f'Hola, quiero una asesoría en {e["nombre"].lower()}')
         intro = '\n'.join(f'      <p>{p}</p>' for p in e['intro'])
         incluye = '\n'.join(f'        <li>{i}</li>' for i in e['incluye'])
         faqs_html = '\n'.join(f'''      <details>
@@ -706,14 +868,13 @@ def construir_especialidades():
       <div class="faq">
 {faqs_html}
       </div>
-      <div class="aviso">Los precios publicados son ilustrativos y aproximados; el costo final depende de las particularidades de cada caso y se confirma en la asesoría. Ofrecemos planes de pago: juicios desde un pago inicial de $7,500 MXN.</div>
+      <div class="aviso">Cada asunto es único y requiere un análisis personalizado por parte de nuestros especialistas en derecho familiar. Tras la asesoría inicial, realizamos una evaluación detallada de tu caso y te hacemos llegar una propuesta de honorarios clara y transparente, con opciones de pago accesibles adaptadas a tus necesidades.</div>
     </article>
     <aside class="lateral">
       <div class="widget" style="background:linear-gradient(160deg,var(--rosa-marca),var(--rosa-fuerte));color:#fff">
-        <h3 style="color:#fff">Honorarios</h3>
-        <p style="font-family:var(--fuente-titulo);font-size:1.8rem;font-weight:800;margin-bottom:.25rem">{e['precio']}*</p>
-        <p style="font-size:.85rem;color:rgba(255,255,255,.9)">*Precio ilustrativo. Primera consulta GRATIS.</p>
-        <a class="btn btn-whatsapp" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=18)} Consulta GRATIS</a>
+        <h3 style="color:#fff">Honorarios a tu medida</h3>
+        <p style="font-size:.9rem;color:rgba(255,255,255,.92);margin-bottom:1rem">Cada caso es único. Tras tu <strong>primera consulta GRATIS</strong> te entregamos una propuesta de honorarios clara y transparente, con opciones de pago accesibles.</p>
+        <a class="btn btn-whatsapp" href="{wa_esp}" target="_blank" rel="noopener">{WA_SVG.format(s=18)} Consulta GRATIS</a>
         <a class="btn btn-claro" href="{TEL_HREF}" style="margin-top:.75rem">{icono('telefono', 18)} {TEL_TXT}</a>
       </div>
       <div class="widget">
@@ -725,18 +886,17 @@ def construir_especialidades():
     </aside>
   </div>
 </section>
-''' + cta_final()
+''' + cta_final(wa_link=wa_esp)
         pagina(e['slug'] + '.html',
                f"{e['titulo']} | Abogados Familiares CDMX",
                e['meta'], cuerpo,
-               extra_head=jsonld_faq(e['faqs']))
+               extra_head=jsonld_faq(e['faqs']), wa_link=wa_esp)
 
     # índice de especialidades
-    tarjetas = '\n'.join(f'''      <article class="tarjeta">
+    tarjetas = '\n'.join(f'''      <article class="tarjeta tarjeta-esp">
         <div class="icono">{icono(e['icono'])}</div>
         <h3>{e['nombre']}</h3>
-        <p>{e['corta']}</p>
-        <p class="precio">{e['precio']}*</p>
+        <p>{HOME_DESC.get(e['slug'], e['corta'])}</p>
         <a class="enlace" href="{e['slug']}.html">Conocer más →</a>
       </article>''' for e in ESPECIALIDADES)
     cuerpo = f'''<div class="page-header">
@@ -756,7 +916,7 @@ def construir_especialidades():
     <div class="grid-servicios">
 {tarjetas}
     </div>
-    <p class="nota-precios">*Precios ilustrativos y aproximados "desde", en pesos mexicanos. El costo final depende de cada caso. Ofrecemos planes de pago: juicios desde un pago inicial de $7,500 MXN.</p>
+    <p class="nota-precios">Cada caso es único: tras tu primera consulta GRATIS te entregamos una propuesta de honorarios clara, transparente y adaptada a tus necesidades.</p>
   </div>
 </section>
 ''' + cta_final()
@@ -1009,7 +1169,8 @@ def construir_contacto():
         <li><span class="icono">{icono('reloj', 22)}</span><div><b>Horario</b><span>Lun–Vie 9:00–19:00 · Sáb 10:00–14:00<br>Urgencias por violencia familiar: 24/7</span></div></li>
       </ul>
       <div class="mapa">
-        <iframe src="https://www.google.com/maps?q=19.4358,-99.1545&z=16&output=embed" title="Mapa de la ubicación del despacho — Be Grand Downtown Reforma, Col. Tabacalera, CDMX" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        <iframe src="{MAPS_EMBED}" title="Mapa de la ubicación del despacho — Abogados Familiares CDMX, Col. Tabacalera, CDMX" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <p style="margin:.6rem 0 0;text-align:center"><a href="{MAPS_LINK}" target="_blank" rel="noopener">Ver en Google Maps →</a></p>
       </div>
     </div>
   </div>
@@ -1017,7 +1178,7 @@ def construir_contacto():
 '''
     pagina('contacto.html',
            'Contacto | Abogados Familiares CDMX',
-           'Agenda tu consulta GRATIS con abogados familiares en CDMX. ☎ 56 2082 9905. Be Grand Downtown Reforma, Col. Tabacalera, a 2 min del Metro Revolución.',
+           'Agenda tu consulta GRATIS con abogados familiares en CDMX. ☎ 55 1467 6633. Be Grand Downtown Reforma, Col. Tabacalera, a 2 min del Metro Revolución.',
            cuerpo, activo='contacto', extra_head=JSONLD_LEGAL)
 
 # ============================================================ LEGALES ========
