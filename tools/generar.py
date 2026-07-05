@@ -466,25 +466,30 @@ def construir_home():
         </figure>''' for t, c in testimonios)
 
     blog_cards = '\n'.join(f'''      <article class="tarjeta tarjeta-blog">
-        <div class="portada">{icono(ic, 44)}</div>
+        <div class="portada"><img src="assets/img/{thumb}" alt="{alt}" width="480" height="320" loading="lazy"></div>
         <div class="cuerpo">
           <span class="categoria">{cat}</span>
           <h3><a href="blog/{slug}.html" style="color:inherit">{tit}</a></h3>
           <p>{ext}</p>
           <a class="enlace" href="blog/{slug}.html">Leer más →</a>
         </div>
-      </article>''' for slug, cat, tit, ext, ic in [
+      </article>''' for slug, cat, tit, ext, thumb, alt in [
         ('cuanto-cuesta-divorcio-cdmx-2026', 'Divorcio', '¿Cuánto cuesta un divorcio en CDMX en 2026?',
-         'Desglosamos honorarios, gastos judiciales y tiempos por tipo de divorcio, del express al contencioso, y cómo ahorrar.', 'corazon'),
+         'Desglosamos honorarios, gastos judiciales y tiempos por tipo de divorcio, del express al contencioso, y cómo ahorrar.', 'blog-1.jpg',
+         'Pareja firmando documentos de divorcio con un abogado'),
         ('que-pasa-si-no-paga-pension', 'Pensión Alimenticia', '¿Qué pasa si no pagan la pensión alimenticia?',
-         'Embargo, retención de salario, RNOA, restricción migratoria y hasta prisión: todas las consecuencias del incumplimiento.', 'dinero'),
+         'Embargo, retención de salario, RNOA, restricción migratoria y hasta prisión: todas las consecuencias del incumplimiento.', 'blog-2.jpg',
+         'Documento legal de pensión alimenticia junto a billetes de peso mexicano'),
         ('custodia-compartida-mexico-2026', 'Custodia', 'Custodia compartida en México 2026',
-         'Qué dice la SCJN, qué requisitos piden los jueces y cuándo conviene pedirla. Guía práctica actualizada.', 'familia'),
+         'Qué dice la SCJN, qué requisitos piden los jueces y cuándo conviene pedirla. Guía práctica actualizada.', 'blog-3.jpg',
+         'Madre y padre con su hijo, concepto de custodia compartida'),
     ])
 
     cuerpo = f'''<section class="hero">
+  <img class="hero-bg" src="assets/img/hero.jpg" alt="Abogado familiar en CDMX revisando y firmando documentos legales sobre su escritorio" width="1600" height="1000" fetchpriority="high">
+  <div class="hero-overlay"></div>
   <div class="container hero-grid">
-    <div>
+    <div class="hero-texto">
       <h1>Abogados familiares en Ciudad de México</h1>
       <p class="subtitulo">Especialistas en divorcio express, pensión alimenticia, guarda y custodia, patria potestad, sucesiones, testamentos, contratos y convenios. Más de 15 años representando familias ante los juzgados familiares de la CDMX. <strong>Primera consulta en línea GRATIS.</strong></p>
       <p class="hero-confianza">
@@ -497,10 +502,22 @@ def construir_home():
         <a class="btn btn-whatsapp btn-grande" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=20)} Consulta GRATIS por WhatsApp</a>
         <a class="btn btn-secundario btn-grande" href="{TEL_HREF}">{icono('telefono', 20)} Llamar: {TEL_TXT}</a>
       </div>
+      <div class="hero-equipo">
+        <div class="hero-equipo-fotos">
+          <img src="assets/img/equipo-1.jpg" alt="Retrato de abogada familiar del despacho" width="240" height="240" loading="lazy">
+          <img src="assets/img/equipo-2.jpg" alt="Retrato de abogado familiar del despacho" width="240" height="240" loading="lazy">
+          <img src="assets/img/equipo-3.jpg" alt="Retrato de abogada familiar del despacho" width="240" height="240" loading="lazy">
+        </div>
+        <span>Nuestro equipo de abogados especialistas</span>
+      </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/logo-color.png" alt="Abogados Familiares CDMX — balanza de la justicia y familia" width="395" height="91" fetchpriority="high">
+      <img src="assets/logo-color.png" alt="Abogados Familiares CDMX — balanza de la justicia y familia" width="395" height="91">
       <span class="badge">Especialistas exclusivos en Derecho Familiar</span>
+      <a class="hero-caso" href="especialidades.html">
+        <span>Conoce nuestras áreas de práctica</span>
+        <span class="hero-caso-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -529,6 +546,27 @@ def construir_home():
       <span class="otras-areas-titulo">Otras áreas de práctica</span>
       <div class="chips-areas">
 {otras_html}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="consulta-band">
+  <div class="container consulta-grid">
+    <div class="consulta-foto">
+      <img src="assets/img/consulta.jpg" alt="Balanza de la justicia sobre el escritorio de un abogado familiar en CDMX" width="680" height="780" loading="lazy">
+    </div>
+    <div class="consulta-info">
+      <span class="kicker kicker-claro">Apoyo legal cercano</span>
+      <h2>Tu primera consulta, sin costo</h2>
+      <p>Con un enfoque firme en la integridad, la experiencia y los resultados, somos tu aliado para navegar la complejidad del derecho familiar. Empieza en tres pasos sencillos, sin compromiso.</p>
+      <div class="consulta-pasos">
+        <div class="paso"><span class="paso-ico">{icono('reloj', 26)}</span><b>Agenda tu cita</b></div>
+        <div class="paso"><span class="paso-ico">{WA_SVG.format(s=24)}</span><b>Asesoría gratis</b></div>
+        <div class="paso"><span class="paso-ico">{icono('documento', 26)}</span><b>Propuesta clara</b></div>
+      </div>
+      <div class="hero-ctas" style="margin-top:1.75rem">
+        <a class="btn btn-whatsapp" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=18)} Consulta GRATIS por WhatsApp</a>
       </div>
     </div>
   </div>
@@ -739,13 +777,18 @@ def construir_home():
 </section>
 
 <section class="seccion" id="faq">
-  <div class="container">
-    <div class="seccion-titulo">
-      <span class="kicker">Preguntas frecuentes</span>
-      <h2>Resolvemos tus dudas</h2>
-    </div>
-    <div class="faq">
+  <div class="container faq-grid">
+    <div>
+      <div class="seccion-titulo seccion-titulo-izq">
+        <span class="kicker">Preguntas frecuentes</span>
+        <h2>Resolvemos tus dudas</h2>
+      </div>
+      <div class="faq">
 {faqs_html}
+      </div>
+    </div>
+    <div class="faq-foto">
+      <img src="assets/img/faq.jpg" alt="Abogada familiar revisando el caso de un cliente en su tablet" width="680" height="780" loading="lazy">
     </div>
   </div>
 </section>
