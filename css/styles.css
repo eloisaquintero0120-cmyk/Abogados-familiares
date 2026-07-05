@@ -107,11 +107,22 @@ a:hover{ text-decoration:underline; }
 
 /* ---------- Header / Navbar ---------- */
 .header{
-  position:sticky; top:0; z-index:100; background:var(--blanco);
-  border-bottom:1px solid var(--rosa-100);
-  transition:box-shadow .25s;
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,.62);
+  backdrop-filter:blur(16px) saturate(1.6);
+  -webkit-backdrop-filter:blur(16px) saturate(1.6);
+  border-bottom:1px solid rgba(255,255,255,.45);
+  transition:background .25s, box-shadow .25s, border-color .25s;
 }
-.header.scrolled{ box-shadow:var(--sombra); }
+.header.scrolled{
+  background:rgba(255,255,255,.82);
+  border-bottom-color:rgba(182,74,57,.12);
+  box-shadow:0 6px 24px rgba(42,46,52,.10);
+}
+/* Fallback si el navegador no soporta backdrop-filter */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+  .header{ background:var(--blanco); }
+}
 .navbar{
   display:flex; align-items:center; justify-content:space-between;
   gap:1rem; min-height:72px; padding-block:.5rem;
@@ -143,8 +154,11 @@ a:hover{ text-decoration:underline; }
 .dropdown.abierto .dropdown-toggle .caret{ transform:rotate(180deg); }
 .dropdown-menu{
   position:absolute; top:calc(100% + 8px); left:0; min-width:260px;
-  background:var(--blanco); border-radius:var(--radio); box-shadow:var(--sombra);
-  border:1px solid var(--rosa-100); list-style:none; margin:0; padding:.5rem;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(16px) saturate(1.5);
+  -webkit-backdrop-filter:blur(16px) saturate(1.5);
+  border-radius:var(--radio); box-shadow:0 12px 32px rgba(42,46,52,.16);
+  border:1px solid rgba(255,255,255,.6); list-style:none; margin:0; padding:.5rem;
   display:none; z-index:101;
 }
 .dropdown.abierto .dropdown-menu{ display:block; }
@@ -194,9 +208,12 @@ a:hover{ text-decoration:underline; }
 .hero .btn-secundario{ color:#fff; border-color:rgba(255,255,255,.55); background:transparent; }
 .hero .btn-secundario:hover{ background:#fff; color:var(--oscuro); border-color:#fff; }
 .hero-visual{
-  background:var(--blanco); border-radius:calc(var(--radio) * 1.5);
-  box-shadow:var(--sombra); padding:2.5rem; text-align:center;
-  border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.10);
+  backdrop-filter:blur(20px) saturate(1.3);
+  -webkit-backdrop-filter:blur(20px) saturate(1.3);
+  border-radius:calc(var(--radio) * 1.5);
+  box-shadow:0 10px 40px rgba(0,0,0,.28); padding:2.5rem; text-align:center;
+  border:1px solid rgba(255,255,255,.30);
 }
 .hero-visual img{ margin-inline:auto; }
 .hero-visual .badge{
@@ -591,16 +608,8 @@ a:hover{ text-decoration:underline; }
 
 /* ==================== Componentes estilo Lawfor (con imágenes) ==================== */
 
-/* Hero: equipo + tarjeta de caso */
+/* Hero: tarjeta de caso */
 .hero-texto{ max-width:640px; }
-.hero-equipo{ display:flex; align-items:center; gap:.9rem; margin-top:2rem; }
-.hero-equipo-fotos{ display:flex; }
-.hero-equipo-fotos img{
-  width:46px; height:46px; border-radius:50%; object-fit:cover;
-  border:2px solid #fff; margin-left:-12px; background:var(--gris-suave);
-}
-.hero-equipo-fotos img:first-child{ margin-left:0; }
-.hero-equipo span{ font-size:.88rem; color:rgba(255,255,255,.88); font-weight:600; }
 .hero-caso{
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
   margin-top:1.5rem; padding:.9rem 1.1rem; border-radius:var(--radio);
@@ -626,10 +635,17 @@ a:hover{ text-decoration:underline; }
   display:inline-block; color:var(--rosa-marca); font-size:.8rem; font-weight:700;
   letter-spacing:.12em; text-transform:uppercase; margin-bottom:.5rem;
 }
-.consulta-pasos{ display:flex; flex-wrap:wrap; gap:1.5rem 2.5rem; margin-top:1.75rem; }
-.paso{ display:flex; flex-direction:column; align-items:center; gap:.6rem; text-align:center; }
+.consulta-pasos{ display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.75rem; }
+.paso{
+  flex:1 1 150px; display:flex; flex-direction:column; align-items:center; gap:.7rem;
+  text-align:center; padding:1.4rem 1rem; border-radius:var(--radio);
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.16);
+}
 .paso-ico{
-  width:64px; height:64px; border-radius:50%; border:1.5px solid rgba(255,255,255,.4);
+  width:60px; height:60px; border-radius:50%; border:1.5px solid rgba(224,141,125,.6);
+  background:rgba(224,141,125,.12);
   display:flex; align-items:center; justify-content:center; color:var(--rosa-marca);
 }
 .paso b{ font-weight:600; font-size:.92rem; }

@@ -502,17 +502,9 @@ def construir_home():
         <a class="btn btn-whatsapp btn-grande" href="{WA}" target="_blank" rel="noopener">{WA_SVG.format(s=20)} Consulta GRATIS por WhatsApp</a>
         <a class="btn btn-secundario btn-grande" href="{TEL_HREF}">{icono('telefono', 20)} Llamar: {TEL_TXT}</a>
       </div>
-      <div class="hero-equipo">
-        <div class="hero-equipo-fotos">
-          <img src="assets/img/equipo-1.jpg" alt="Retrato de abogada familiar del despacho" width="240" height="240" loading="lazy">
-          <img src="assets/img/equipo-2.jpg" alt="Retrato de abogado familiar del despacho" width="240" height="240" loading="lazy">
-          <img src="assets/img/equipo-3.jpg" alt="Retrato de abogada familiar del despacho" width="240" height="240" loading="lazy">
-        </div>
-        <span>Nuestro equipo de abogados especialistas</span>
-      </div>
     </div>
     <div class="hero-visual">
-      <img src="assets/logo-color.png" alt="Abogados Familiares CDMX — balanza de la justicia y familia" width="395" height="91">
+      <img src="assets/logo-blanco.png" alt="Abogados Familiares CDMX — balanza de la justicia y familia" width="395" height="91">
       <span class="badge">Especialistas exclusivos en Derecho Familiar</span>
       <a class="hero-caso" href="especialidades.html">
         <span>Conoce nuestras áreas de práctica</span>
